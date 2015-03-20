@@ -4,9 +4,13 @@ This website users xmpp over websockets. This means, that every action a user ma
 
 Technic
 ------------
-This website user angular-xmpp-services. [https://github.com/robotnic/angular-xmpp-services]
+This website uses angular-xmpp-services. [https://github.com/robotnic/angular-xmpp-services]
 
-Project Structure is ng-boilerplate based.
+![structure](https://raw.githubusercontent.com/robotnic/angular-xmpp-services/master/src/assets/docimg/structure.png)
+
+Build process is ng-boilerplate based.
+
+
 
 Install
 --------
