@@ -41,7 +41,12 @@ Directive
             //scope.node = attrs.node;
             scope.$watch("node",function(){
                 if(scope.buddycloud){
-                    scope.buddycloud.open({node:attrs.node});
+                    if(attrs.node=='recent'){
+                        scope.stream.buddycloud.recent();
+                    }else{
+                        console.log(attrs.node);
+                        scope.buddycloud.open({node:attrs.node});
+                    }
                 }
             });
 
@@ -76,7 +81,11 @@ Directive
             $scope.buddycloud.init().then(function(){
                 console.log("bc init");
                 if($scope.node){
-                    $scope.buddycloud.open({node:$scope.node});
+                    if($scope.node=="recent"){
+                        $scope.buddycloud.recent();
+                    }else{
+                        $scope.buddycloud.open({node:$scope.node});
+                    }
                 }else{
 
                 }

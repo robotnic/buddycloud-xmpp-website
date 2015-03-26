@@ -24,15 +24,15 @@
         <section class="newTopic" ng-class="{'write':write}">
 <div class="avatar" style="background-image:url('assets/icons/avatars/{{buddycloud.xmpp.data.me.jid.user}}.png');"></div>
 
-            <form  ng-submit="buddycloud.publish(content)">
+            <form  ng-submit="buddycloud.publish(content);content.atom.content=''">
             <div class="holder">
               <div class="expandingArea active">
                 <pre><span></span><br></pre>
-                <textarea placeholder="New Topic..." ng-model="content.atom.content" ng-focus="$parent.write=true" ng-blur="$parent.write=false"></textarea>
+                <textarea placeholder="New Topic..." ng-keyup="($event.keyCode == 13 && $event.ctrlKey )? buddycloud.publish(content) : null" ng-model="content.atom.content" ng-focus="$parent.write=true" ng-blur="$parent.write=false"></textarea>
               </div>
               <div class="controls clearfix">
                 <div class="hint">ctrl + enter to post</div>
-                <input class="button callToAction createComment" type="submit"/>
+                <input class="button" type="submit"/>
               </div>
             </div>
             </form>
@@ -51,7 +51,7 @@
                 </div>
                 <div class="postmeta">
                     <span lass="date" am-time-ago="item.entry.atom.published"></span>
-                  <button class="flat delete button" title="Delete Post">▼</button>
+                  <button class="flat delete button" title="Delete Post" ng-if="item.remove" ng-click="item.remove()">✖</button>
                 </div>
                 <span class="name">vera<span class="domain">@buddycloud.com</span></span><span class="location">from Campus Library</span>
                 <p>{{item.entry.atom.content.content}}</p>
@@ -65,7 +65,7 @@
                   </div>
                   <div class="postmeta">
                     <span lass="date" am-time-ago="subitem.entry.atom.published"></span>
-                  <button class="flat delete button" title="Delete Post">▼</button>
+                  <button class="flat delete button" title="Delete Post" ng-if="subitem.remove" ng-click="subitem.remove()">✖</button>
                   </div>
                   <span class="name">mona<span class="domain">@buddycloud.com</span></span><span class="location">from Cafe Extra</span>
                   <p>{{subitem.entry.atom.content.content}}</p>
@@ -76,16 +76,11 @@
                   <div class="holder">
                     <div class="expandingArea active">
                       <pre><span></span><br></pre>
-                      <textarea placeholder="comment" ng-focus="write=true" ng-blur="write=false" ng-model="subtext"></textarea>
-<!--
-                        <form ng-show="editmode[subitem.id]" ng-model="subitem.entry.atom.content.content" ng-submit="save(subitem)" />
-                        <input ng-model="subitem.entry.atom.content.content" />
-                        </form>
--->
+                      <textarea placeholder="comment" ng-focus="write=true" ng-blur="write=false" ng-model="subtext" ng-keyup="($event.keyCode == 13 && $event.ctrlKey )? item.reply(subtext) : null"></textarea>
                     </div>
                     <div class="controls clearfix">
                       <div class="hint">ctrl + enter to post</div>
-                      <input class="button callToAction createComment" type="submit"/>
+                      <input class="button " type="submit"/>
                     </div>
                     </form>
                   </div>
@@ -201,7 +196,7 @@
 
     <div class="thediv" ng-if="$parent.showconfigform" style="position:relative;height:1300px">
             <h2>Node Configuration</h2>
-            <xmppform formdata="buddycloud.data.config" onclose="formdata=null" onsave="setConfig"></xmppform>
+            <xmppform formdata="buddycloud.data.config" onclose="$parent.$parent.showconfigform=false" onsave="setConfig"></xmppform>
     </div>
 
 

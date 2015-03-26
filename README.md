@@ -16,9 +16,11 @@ Install
 --------
 `
 git clone git@github.com:robotnic/angular-xmpp-services.git 
-`
+npm install
+bower install
+grunt watch --force`
 
-open index.html in browser.
+open build/index.html in browser.
 
 
 

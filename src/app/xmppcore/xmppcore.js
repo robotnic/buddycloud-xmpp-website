@@ -86,7 +86,13 @@ angular.module('XmppCore', [])
                     q.resolve();
                 }
                 console.log("vor primus",host);
-                api.socket = new Primus(host);
+                api.socket = new Primus(host,{
+                  reconnect: {
+                      max: Infinity // Number: The max delay before we try to reconnect.
+                    , min: 500 // Number: The minimum delay before we try reconnect.
+                    , retries: 10 // Number: How many times we shoult try to reconnect.
+                  }
+                });
                 api.socket.on("open", function() {
                     var jid=localStorage.getItem("jid");
                     var password=localStorage.getItem("password");

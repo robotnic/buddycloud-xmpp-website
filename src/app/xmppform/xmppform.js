@@ -32,6 +32,7 @@ Roster
         FORM=$scope;
         console.log($scope.data);
         $scope.close=function(){
+            console.log("close");
             $scope.onclose();
         };
         $scope.save=function(){
