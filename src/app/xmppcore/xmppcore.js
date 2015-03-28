@@ -12,7 +12,10 @@ angular.module('XmppCore', [])
 
 .factory("Xmpp",function($q){
     return function(host){
-        console.log("XMPP init");
+        if(!host){
+            host="//"+location.origin;
+        }
+        console.log("XMPP init",host);
         //var socket = new Primus("https://xmpp-ftw.jit.su/");   //--------------- put to config
         //var socket = new Primus("https://laos.buddycloud.com");   //--------------- put to config
         //var socket = new Primus("http://localhost:3000");
