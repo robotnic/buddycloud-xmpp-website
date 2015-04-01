@@ -24,7 +24,7 @@
 <body ng-controller="page">
     <div ng-if="!xmpp.data.me" ng-include="'assets/partials/landing.html'"></div>
     <div ng-show="xmpp.data.me">
-    <xmpp bhost="https://laos.buddycloud.com" chost="http://localhost:3000" oninit="initxmpp(scope)">
+    <xmpp bhost="https://laos.buddycloud.com" host="http://localhost:3000" oninit="initxmpp(scope)">
         <div style="position:absolute;top:200px;left:20px;z-index:1000;background-color:white;">
             <xmpplogin></xmpplogin>
             <div style="display:block">
@@ -36,7 +36,7 @@
 
         <div class="sidebar">
             <div class="personal channel" style="width:100%;height:80px">
-                <div class="avatar" style="background-image: url(assets/icons/avatars/{{xmpp.data.me.jid.user}}.png)" ng-click="changenode('recent')">
+                <div class="avatar" style="background-image: url('{{xmpp.data.me.jid|gravatar}}')" ng-click="changenode('recent')" title="{{xmpp.data.me.jid.user+'@'+xmpp.data.me.jid.domain}}" ui-sref="index">
                     <span class="channelpost counter">2</span>
                     <span class="message counter" ng-if="chat.notifications.unreadmessages">{{chat.notifications.unreadmessages}}</span>
                 </div>
@@ -71,7 +71,7 @@
                         <div class="channel bubbling" style="top: 0px; z-index: 4;">
 
 
-                            <div ng-repeat="node in stream.buddycloud.data.subscriptions" ui-sref="node({node:node.node})" class="menu" ng-class="{'selected':selectednode.node==node.node}">
+                            <div ng-repeat="node in stream.buddycloud.data.subscriptions track by node.node" ui-sref="node({node:node.node})" class="menu" ng-class="{'selected':selectednode.node==node.node}">
                                 <!--
 <img ng-src="assets/icons/avatars/{{node.name}}.png" style="height:25px"/>
 {{node.name}} <span ng-show="buddycloud.data.unread[node.node]" class="badge">{{buddycloud.data.unread[node.node]}}</span>
@@ -82,7 +82,7 @@
 </div>
 -->
                                 <div class="channel thechannel" ng-class="{'selected':node.node==stream.buddycloud.data.currentnode}">
-                                    <div class="avatar" style="background-image: url(assets/icons/avatars/{{node.node|getUser}}.png)">
+                                    <div class="avatar" style="background-image: url('{{node.node|gravatar}}')" title="{{node.node}}">
                                         <span class="channelpost counter" ng-if="stream.buddycloud.data.unread[node.node]">{{stream.buddycloud.data.unread[node.node]}}</span>
                                         <!-- sorry -->
                                         <span class="channelpost counter admin" ng-if="chat.notifications.unread[stream.buddycloud.data.affiliations[node.node].owner[0].jid.user+'@'+stream.buddycloud.data.affiliations[node.node].owner[0].jid.domain]" ng-click="openchat(node.node);">{{chat.notifications.unread[stream.buddycloud.data.affiliations[node.node].owner[0].jid.user+'@'+stream.buddycloud.data.affiliations[node.node].owner[0].jid.domain]}}</span>

@@ -42,7 +42,9 @@ Directive
             scope.$watch("node",function(){
                 if(scope.buddycloud){
                     if(attrs.node=='recent'){
-                        scope.stream.buddycloud.recent();
+                        scope.node='recent';
+                        //scope.stream.buddycloud.recent();
+                        scope.buddycloud.recent();
                     }else{
                         console.log(attrs.node);
                         scope.buddycloud.open({node:attrs.node});
@@ -102,7 +104,69 @@ Directive
             var node="/user/"+id+"/posts";
             $scope.onchangenode({node:node});
         }
+        $scope.deleteNode=function(){
+            $scope.buddycloud.send("xmpp.buddycloud.delete",{node:$scope.buddycloud.data.currentnode}).then(function(){;
+                console.log("deleted node");
+                $scope.onchangenode({node:"recent"});
+            });
+        }
+        $scope.gravatar=function(jid){
+            if(typeof(jid)=="string"){
+                var jidstring=jid
+            }else{
+                var jidstring=jid.user+"/"+jid.domain;
+            }
+            console.log("avatar for",jidstring);
+            var hash=hashCode(jidstring);
+            var url= "http://www.gravatar.com/avatar/"+hash+"?d=monsterid&f=y";
+            return url;
+        }
+        hashCode = function(s){
+          return s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);              
+        }
         $scope.oninit({scope:$scope});
     }
-]);
+])
 
+
+.filter("gravatar",function(){
+     return function(jid){
+            if(!jid){
+                jid="fehler@teufel.com";
+            }
+            var jidstring='recent';
+            if(typeof(jid)=="string"){
+                if(jid!=='recent'){
+                    var jidstring=trimjidstring(jid);
+                }
+//                var jidstring=jid;
+            }else{
+                var jidstring=jid.user+"@"+jid.domain;
+            }
+            var hash=hashCode(jidstring);
+            var url= "http://www.gravatar.com/avatar/"+hash+"?d=monsterid&f=y";
+            return url;
+    };
+    function hashCode(s){
+      var s= s.split("").reduce(function(a,b){a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
+        s=Math.abs(parseInt(s));
+      return s;
+    }
+
+    function trimjidstring(jid){
+        var user=jid.split("@")[0];
+        var domain=jid.split("@")[1];
+        if(user.indexOf("/")!==-1){
+                user=user.substring(user.lastIndexOf("/")+1);
+        }
+        if(domain.indexOf("/")!==-1){
+                console.log(domain);
+                domain=domain.substring(0,domain.indexOf("/"));
+                console.log(domain);
+        }
+        return user+"@"+domain;
+    }
+
+}
+
+);

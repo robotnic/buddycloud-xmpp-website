@@ -10,30 +10,39 @@
           <div class="span-1">
             <h2>Channels</h2>
             <div class="list">
-              <div class="channel justify">
-                <div class="avatar" style="background-image: url(avatars/user5.jpg)"></div>
+              <div class="channel justify" ui-sref="node({node:'/user/lobby@laos.buddycloud.com/posts'})">
+                <div class="avatar" style="background-image: url({{'/user/lobby@laos.buddycloud.com/posts'|gravatar}})"></div>
                 <div class="info flex">
-                  <span class="owner">Anna McWalowitz</span>
-                  <span class="about">23/w/deggendorf</span>
+                  <span class="owner">lobby</span>
+                  <span class="about">A good starting point</span>
                 </div>
                 <div class="follow button callToAction">Follow</div>
               </div>
-              <div class="channel justify">
-                <div class="avatar" style="background-image: url(avatars/user11.jpg)"></div>
+              <div class="channel justify" ui-sref="node({node:'/user/angular-xmpp@laos.buddycloud.com/posts'})">
+                <div class="avatar" style="background-image: url({{'/user/angular-xmpp@laos.buddycloud.com/posts'|gravatar}})"></div>
                 <div class="info flex">
-                  <span class="owner">Anna Robertson</span>
-                  <span class="about">Where is the love?</span>
+                  <span class="owner">angular-xmpp</span>
+                  <span class="about">Technical staff about angular-xmpp.</span>
                 </div>
                 <div class="follow button callToAction">Follow</div>
               </div>
-              <div class="channel justify">
-                <div class="avatar" style="background-image: url(avatars/user13.jpg)"></div>
+              <div class="channel justify"  ui-sref="node({node:'/user/simon@denisw.buddycloud.com/posts'})">
+                <div class="avatar" style="background-image: url({{'/user/simon@denisw.buddycloud.com/posts'|gravatar}})"></div>
                 <div class="info flex">
-                  <span class="owner">Anna Huber</span>
-                  <span class="about">Ich bin ein Berliner!</span>
+                  <span class="owner">imaginator</span>
+                  <span class="about">Simon Tennant</span>
                 </div>
                 <div class="follow button callToAction">Follow</div>
               </div>
+              <div class="channel justify"  ui-sref="node({node:'/user/robotnic@laos.buddycloud.com/posts'})">
+                <div class="avatar" style="background-image: url({{'/user/robotnic@laos.buddycloud.com/posts'|gravatar}})"></div>
+                <div class="info flex">
+                  <span class="owner">robotnic</span>
+                  <span class="about">Bernhard Zwischenbrugger</span>
+                </div>
+                <div class="follow button callToAction">Follow</div>
+              </div>
+ 
               <div class="channel justify">
                 <div class="avatar" style="background-image: url(avatars/user6.jpg)"></div>
                 <div class="info flex">
@@ -56,11 +65,8 @@
             <h2>Posts</h2>
             <div class="list posts">
               <article class="post" ng-repeat="item in findresults.results" ui-sref="node({node:item.node})">
-<pre>
-{{item.node|json}}
-</pre>
                 <section class="opener">
-                  <img class="avatar" src="assets/icons/avatars/{{item.entry.atom.author.name|getUser}}.png" title="{{item.entry.atom.author.name}}">
+                  <img class="avatar" src="{{item.entry.atom.author.name|gravatar}}" title="{{item.entry.atom.author.name}}">
                   <div class="postmeta">
                     <span lass="date" am-time-ago="item.entry.atom.published"></span>
 

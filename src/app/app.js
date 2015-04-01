@@ -59,14 +59,20 @@ angular.module('XmppApp', [
             views: {
                 "layer": {
                     templateUrl: "createnode/template.tpl.html",
-                    controller: function($scope) {
+                    controller: function($scope,$state) {
                         $scope.save = function() {
                             console.log($scope.form);
                             console.log($scope);
-                            $scope.stream.buddycloud.send('xmpp.buddycloud.create', {
-                                'node': '/user/' + $scope.form[0].value + '@laos.buddycloud.com/posts',
+                            var node='/user/' + $scope.form[0].value + '@laos.buddycloud.com/posts';
+                            $scope.stream.buddycloud.createNode({
+                                'node': node,
                                 'options': $scope.form
-                            })
+                            }).then(function(){
+                                console.log("auf mach");
+                                $state.go('node', { node: node });
+                            }).then(function(error){
+                                console.log("create error",error);
+                            });
                         };
                         $scope.form = [{
                             "var": "name",
@@ -123,6 +129,7 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
             $scope.xmpp.openchat($scope.xmpp.parseNodeString(node).jid);
         }
         $scope.changenode = function(node) {
+            console.log("changenode",node);
             $scope.node = node;
             $scope.nodeuser = $scope.xmpp.parseNodeString(node);
             //$location.hash(node);

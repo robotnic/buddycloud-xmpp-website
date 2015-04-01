@@ -2,31 +2,33 @@
     <div class="channelView personal clearfix">
         <header class="channelHeader justify">
             <div ng-if="stream.buddycloud.data.currentnode=='recent'">
-<img src="assets/icons/buddycloud_logo.png"/>
-</div>
-            
-            <div ng-repeat="item in stream.buddycloud.data.config" ng-if="item.var=='pubsub#owner'" class="avatar big" style="background-image:url('assets/icons/avatars/{{item.value|getUser}}.png');"></div>
-            <div class="flex titleText">
-                <h2 class="owner" ng-repeat="item in stream.buddycloud.data.config" ng-if="item.var=='pubsub#title'">{{item.value}}</h2>
-                <div class="about" ng-repeat="item in stream.buddycloud.data.config" ng-if="item.var=='pubsub#description'">{{item.value}}</div>
-
+                <img src="assets/icons/buddycloud_logo.png"/>
             </div>
-            <nav class="inChannel">
-                <!--<span class="messages button newMessage">
-    <span class="holder">Messages</span><span class="message counter">2</span>
-  </span>-->
-                <span class="channel button">
-    <span class="holder">Channel</span>
-                </span>
-                <span class="hidden save button">Save</span>
-                <!--<span class="edit button">Edit</span>-->
-                <div ng-show="node!=='recent'">
-                    <span class="button" ng-show="stream.buddycloud.unsubscribe" ng-click="stream.buddycloud.unsubscribe({node:node});">Unfollow</span>
-                    <span class="button" ng-show="stream.buddycloud.subscribe" ng-click="stream.buddycloud.subscribe({node:node});">Follow</span>
-                    <span class="button" ng-show="stream.buddycloud.config" ng-click="showconfigform=!showconfigform">Config</span>
+            <div ng-show="stream.buddycloud.data.currentnode!=='recent'"> 
+                <div ng-repeat="item in stream.buddycloud.data.config" ng-if="item.var=='pubsub#owner'" class="avatar big" style="background-image:url('{{stream.buddycloud.data.currentnode|gravatar}}');"></div>
+                <div class="flex titleText">
+                    <h2 class="owner" ng-repeat="item in stream.buddycloud.data.config" ng-if="item.var=='pubsub#title'">{{item.value}}</h2>
+                    <div class="about" ng-repeat="item in stream.buddycloud.data.config" ng-if="item.var=='pubsub#description'">{{item.value}}</div>
+
                 </div>
-            </nav>
+                <nav class="inChannel">
+                    <!--<span class="messages button newMessage">
+        <span class="holder">Messages</span><span class="message counter">2</span>
+      </span>-->
+                    <span class="channel button">
+        <span class="holder">Channel</span>
+                    </span>
+                    <span class="hidden save button">Save</span>
+                    <!--<span class="edit button">Edit</span>-->
+                    <div ng-show="node!=='recent'" class="actionbutton">
+                        <span class="button" ng-show="stream.buddycloud.unsubscribe" ng-click="stream.buddycloud.unsubscribe({node:node});">Unfollow</span>
+                        <span class="button" ng-show="stream.buddycloud.subscribe" ng-click="stream.buddycloud.subscribe({node:node});">Follow</span>
+                        <span class="button" ng-show="stream.buddycloud.config" ng-click="showconfigform=!showconfigform">Config</span>
+                    </div>
+                </nav>
+            </div>
             <a href="http://www.buddycloud.com/" id="poweredby">powered by buddycloud</a>
+            <a href="http://datenkueche.com/" target="_blank" id="logo"><img src="assets/icons/logoklein.png"/></a>
         </header>
         <div class="centered start">
             <section class="stream private clearfix buddycloud">
@@ -60,7 +62,7 @@
                         <div ng-repeat="(key,node) in stream.buddycloud.data.affiliations[stream.buddycloud.data.currentnode]">
                             <h3>{{key}}  <span class="count">{{node.length}}</span></h3>
                             <div class="btn-group" dropdown is-open="status.isopen" ng-repeat="item in node">
-                                <div class="list dropdown-toggle" dropdown-toggle style="background-image:url('assets/icons/avatars/{{item.jid.user}}.png');background-size:cover;width:30px;height:30px;border:1px solid black;display:inline-block;margin:4px" xxxxng-click="console.log('click');stream.buddycloud.open({'node':'/user/'+item.jid.user+'@'+item.jid.domain+'/posts'})" title="{{item.jid.user+'@'+item.jid.domain}}"></div>
+                                <div class="list dropdown-toggle" dropdown-toggle style="background-image:url('{{item.jid|gravatar}}');background-size:cover;width:30px;height:30px;border:1px solid black;display:inline-block;margin:4px" xxxxng-click="console.log('click');stream.buddycloud.open({'node':'/user/'+item.jid.user+'@'+item.jid.domain+'/posts'})" title="{{item.jid.user+'@'+item.jid.domain}}"></div>
 
 
                                 <ul class="dropdown-menu" role="menu">
@@ -86,31 +88,6 @@
 
 
 
-                    </section>
-                    <div class="showAll">show all</div>
-                    </section>
-                    <!-- /followers -->
-                    <section class="channelList">
-                        <h3>channels nearby <span class="count">10</span></h3>
-                        <div class="list">
-                            <img src="./Streams_files/channel1.jpg">
-                            <img src="./Streams_files/channel2.jpg">
-                            <img src="./Streams_files/channel3.jpg">
-                            <img src="./Streams_files/channel4.jpg">
-                        </div>
-                        <div class="showAll">show all</div>
-                    </section>
-                    <!-- /followers -->
-                    <section class="channelList">
-                        <h3>similar channels <span class="count">8</span></h3>
-                        <div class="list">
-                            <img src="./Streams_files/channel5.jpg">
-                            <img src="./Streams_files/channel6.jpg">
-                            <img src="./Streams_files/channel7.jpg">
-                            <img src="./Streams_files/channel8.jpg">
-                        </div>
-                        <div class="showAll">show all</div>
-                    </section>
                     <!-- /followers -->
                 </div>
                 <!-- /holder -->

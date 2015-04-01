@@ -22,7 +22,7 @@
 
             <!-- main post form -->
         <section class="newTopic" ng-class="{'write':write}">
-<div class="avatar" style="background-image:url('assets/icons/avatars/{{buddycloud.xmpp.data.me.jid.user}}.png');"></div>
+<div class="avatar" style="background-image:url('{{buddycloud.xmpp.data.me.jid|gravatar}}')" title="{{buddycloud.xmpp.data.me.jid.user}}@{{buddycloud.xmpp.data.me.jid.domain}}"></div>
 
             <form  ng-submit="buddycloud.publish(content);content.atom.content=''">
             <div class="holder">
@@ -44,7 +44,7 @@
 
             <article class="post" ng-repeat="item in buddycloud.data.items | orderBy:'entry.atom.published':true" class="item" ng-if="!item.entry['in-reply-to']">
               <section class="opener owner">
-<div class="avatar" style="background-image:url('assets/icons/avatars/{{item.entry.atom.author.name|getUser}}.png');"  title="{{subitem.entry.atom.author.name}}"></div>
+<div class="avatar" style="background-image:url('{{item.entry.atom.author.name|gravatar}}')" title="{{item.entry.atom.author.name}}"></div>
                 <div class="usermeta">
                   <div class="name">Vera Maier</div>
                   <div class="jid">vera@buddycloud.com</div>
@@ -58,7 +58,7 @@
               </section>
                <section class="comments"> 
                 <section class="comment moderator" ng-repeat="subitem in buddycloud.data.items | orderBy:'entry.atom.published'" ng-if="item.id == subitem.entry['in-reply-to'].ref">
-<div class="avatar small" style="background-image:url('assets/icons/avatars/{{subitem.entry.atom.author.name|getUser}}.png');"  title="{{subitem.entry.atom.author.name}}"></div>
+<div class="avatar small" style="background-image:url('{{subitem.entry.atom.author.name|gravatar}}')"  title="{{subitem.entry.atom.author.name}}"></div>
                   <div class="usermeta">
                     <div class="name">Elisabeth Smith</div>
                     <div class="jid">lisa@buddycloud.com</div>
@@ -71,7 +71,7 @@
                   <p>{{subitem.entry.atom.content.content}}</p>
                 </section>
                 <section class="answer" ng-class="{'write':write}" ng-show="item.reply">
-<div class="avatar small" style="background-image:url('assets/icons/avatars/{{buddycloud.xmpp.data.me.jid.user}}.png');"  ></div>
+<div class="avatar small" style="background-image:url('{{buddycloud.xmpp.data.me.jid|gravatar}}')"  title="{{buddycloud.xmpp.data.me.jid.user}}@{{buddycloud.xmpp.data.me.jid.domain}}"></div>
                 <form ng-submit="item.reply(subtext);subtext=''">
                   <div class="holder">
                     <div class="expandingArea active">
@@ -170,7 +170,7 @@
                 </div>
 
 
-                <div class="avatar" style="background-image:url('assets/icons/avatars/{{subitem.entry.atom.author.name|getUser}}.png');" title="{{subitem.entry.atom.author.name}}"></div>
+<div class="avatar" style="background-image:url('{{subitem.entry.atom.author.name|gravatar}}')" title="{{subitem.entry.atom.author.name}}"></div>
 
                 <div class="person">
                     <span class="name" ng-click="opennode(subitem.entry.atom.author.name)">{{subitem.entry.atom.author.name}}</span>
@@ -183,7 +183,8 @@
             </div>
 
             <form ng-if="item.reply" ng-submit="item.reply(subtext);subtext=''" class="subitem">
-                <div class="avatar" style="background-image:url('assets/icons/avatars/{{buddycloud.xmpp.data.me.jid.user}}.png');"></div>
+                <div class="avatar" style="background-image:url('{{buddycloud.xmpp.data.me.jid|gravatar}}');"></div>
+<div class="avatar" style="background-image:url('{{buddycloud.xmpp.data.me.jid|gravatar}}')"></div>
                 <div class="person">
                     <input ng-model="subtext" ng-class="{'saving': newitems[item.entry.atom.id].status == 'saving'}" class="form-control" />
                 </div>
@@ -197,6 +198,8 @@
     <div class="thediv" ng-if="$parent.showconfigform" style="position:relative;height:1300px">
             <h2>Node Configuration</h2>
             <xmppform formdata="buddycloud.data.config" onclose="$parent.$parent.showconfigform=false" onsave="setConfig"></xmppform>
+            <hr>
+            <button ng-click="deleteNode()">delete node</button>
     </div>
 
 
