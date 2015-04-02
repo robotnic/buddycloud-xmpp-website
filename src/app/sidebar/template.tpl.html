@@ -1,0 +1,61 @@
+<div class="sidebar">
+    <div class="personal channel" style="width:100%;height:80px">
+        <div class="avatar" style="background-image: url('{{xmpp.data.me.jid|gravatar}}')" ng-click="changenode('recent')" title="{{xmpp.data.me.jid.user+'@'+xmpp.data.me.jid.domain}}" ui-sref="index">
+            <span class="channelpost counter">2</span>
+            <span class="message counter" ng-if="chat.notifications.unreadmessages">{{chat.notifications.unreadmessages}}</span>
+        </div>
+        <div class="info">
+            <span class="owner">{{xmpp.data.currentnode}}</span>
+            <span class="owner">{{xmpp.data.me.jid.user}}</span>
+            <span class="status">Aww yeah, Mountain Lion rocks</span>
+        </div>
+        <div class="settings noSelect" ng-class="{'showSettings':showsettings}" ng-click="showsettings=!showsettings">
+            <div class="popup">
+                <div class="centered vertical">
+                    <div class="arrow"></div>
+                    <ul>
+                        <li class="newChannel"><a ui-sref="createnode">Create Topic Channel</a>
+                        </li>
+                        <li class="preferences"><a ui-sref="preferences">Preferences</a>
+                        </li>
+                        <li class="logout" ><a ui-sref="logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <nav class="actionBar clearfix">
+        <button ui-sref="find" class="discover"><span>Find Channels</span>
+        </button>
+    </nav>
+    <div class="channels">
+        <div class="antiscroll-inner scrollHolder">
+            <div class="bubbleHolder" style="height: 66px;">
+                <div class="channel bubbling" style="top: 0px; z-index: 4;">
+
+
+                    <div ng-repeat="node in stream.buddycloud.data.subscriptions track by node.node" ui-sref="node({node:node.node})" class="menu" ng-class="{'selected':selectednode.node==node.node}">
+                        <div class="channel thechannel" ng-class="{'selected':node.node==stream.buddycloud.data.currentnode}">
+                            <div class="avatar" style="background-image: url('{{node.node|gravatar}}')" title="{{node.node}}">
+                                <span class="channelpost counter" ng-if="stream.buddycloud.data.unread[node.node]">{{stream.buddycloud.data.unread[node.node]}}</span>
+                                <!-- sorry -->
+                                <span class="channelpost counter admin" ng-if="chat.notifications.unread[stream.buddycloud.data.affiliations[node.node].owner[0].jid.user+'@'+stream.buddycloud.data.affiliations[node.node].owner[0].jid.domain]" ng-click="openchat(node.node);">{{chat.notifications.unread[stream.buddycloud.data.affiliations[node.node].owner[0].jid.user+'@'+stream.buddycloud.data.affiliations[node.node].owner[0].jid.domain]}}</span>
+                            </div>
+                            <div class="info">
+                                <span class="owner">{{node.node|getUser}}</span>
+                                <span class="status">issues/298</span>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <br/>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /antiscroll-inner -->
+        </div>
+        <!-- /channels -->
+    </div>
+</div>

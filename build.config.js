@@ -75,7 +75,7 @@ module.exports = {
         'vendor/angular-bootstrap/ui-bootstrap.min.js',
         'vendor/angular-bootstrap/ui-bootstrap-tpls.min.js',
         'vendor/modernizr/modernizr.js',
-        'vendor/angular-xmpp-services/bin/assets/angular-xmpp-services-0.2.3.js',
+        'vendor/angular-xmpp-services/bin/assets/angular-xmpp-services.js',
         'vendor/moment/min/moment.min.js',
         'vendor/angular-moment/angular-moment.min.js',
         'vendor/ui-router/release/angular-ui-router.js'

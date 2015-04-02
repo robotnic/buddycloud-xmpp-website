@@ -43,23 +43,19 @@
                 <div class="follow button callToAction">Follow</div>
               </div>
  
-              <div class="channel justify">
-                <div class="avatar" style="background-image: url(avatars/user6.jpg)"></div>
+              <div class="channel justify" ng-repeat="item in recomondatations.items">
+                <div class="avatar" style="background-image: url({{'/user/'+item.jid+'/posts'|gravatar}})"></div>
                 <div class="info flex">
-                  <span class="owner">Anna Libratov</span>
-                  <span class="about">Listening to Fuadadeimuada</span>
-                </div>
-                <div class="follow button callToAction">Follow</div>
-              </div>
-              <div class="channel justify">
-                <div class="avatar" style="background-image: url(avatars/user7.jpg)"></div>
-                <div class="info flex">
-                  <span class="owner">Anna Bauer</span>
-                  <span class="about">First Season of Game of Thrones was a blast!</span>
+                  <span class="owner">{{item.jid}}</span>
+                  <span class="about">{{item.description}}</span>
                 </div>
                 <div class="follow button callToAction disabled">follow</div>
               </div>
             </div>
+<pre>
+{{recomondatations|json}}
+</pre>
+
           </div>
           <div class="span-1">
             <h2>Posts</h2>

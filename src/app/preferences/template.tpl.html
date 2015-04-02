@@ -1,0 +1,49 @@
+<form  ng-submit="savepreferences()">
+
+<div class="stream clearfix content">
+
+  <h2 class="pageName" data-l10n="preferences">Preferences</h2>
+<a href="https://github.com/buddycloud/buddycloud-server-java/issues/300">issue/300</a>
+  <div class="email">
+    <label for="email_address" data-l10n="email">Email</label>
+    <input ng-model="preferences.target"  type="text">
+  </div>
+  <div class="notify">
+    <label data-l10n="notifications">Notifications</label>
+    <div>
+      <div>
+        <input  ng-model="preferences.followMyChannel" type="checkbox">
+        <label for="newFollowers" data-l10n="prefsNewFollowers">new followers</label>
+      </div>
+      <div>
+        <input  ng-model="preferences.postMentionedMe" type="checkbox">
+        <label for="mentions" data-l10n="prefsMentions">@mentions</label>
+      </div>
+      <div>
+        <input  ng-model="preferences.postOnMyChannel" type="checkbox">
+        <label for="ownChannel" data-l10n="prefsMyChannel">posts on my channel</label>
+      </div>
+      <div>
+        <input ng-model="preferences.postOnSubscribedChannel" type="checkbox">
+        <label for="followedChannels" data-l10n="prefsAnyChannel">posts on any channel I follow</label>
+      </div>
+      <div>
+        <input ng-model="preferences.followRequest" type="checkbox">
+        <label for="threads" data-l10n="prefsThreads">posts on threads I posted in</label>
+      </div>
+    </div>
+
+    <nav class="bottom clearfix">
+      <div class="floatLeft twoStepConfirmation clearfix">
+        <div class="button white delete stepOne" data-l10n="deleteAccount">Delete account</div>
+        <div class="button danger stepTwo" data-l10n="confirmButton">Confirm</div>
+      </div>
+      <input type="submit" class="button " data-l10n="saveButton" value="Save"/>
+      <div class="button discard" data-l10n="discardButton">Discard</div>
+    </nav>
+</div>
+</form>
+
+
+
+
