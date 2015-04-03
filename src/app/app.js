@@ -80,7 +80,6 @@ angular.module('XmppApp', [
         })
  
         .state('find', {
-            url: "/find",
             views: {
                 "layer": {
                     templateUrl:"find/template.tpl.html",
@@ -99,7 +98,7 @@ angular.module('XmppApp', [
 
         })
         .state('createnode', {
-            url: "^/createnode",
+
             views: {
                 "layer": {
                     templateUrl: "createnode/template.tpl.html",

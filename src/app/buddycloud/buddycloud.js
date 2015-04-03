@@ -160,9 +160,7 @@ Directive
                 user=user.substring(user.lastIndexOf("/")+1);
         }
         if(domain.indexOf("/")!==-1){
-                console.log(domain);
                 domain=domain.substring(0,domain.indexOf("/"));
-                console.log(domain);
         }
         return user+"@"+domain;
     }
