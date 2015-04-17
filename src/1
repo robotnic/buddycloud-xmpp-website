@@ -1,7 +1,7 @@
 var SCOPE = null;
 
 angular.module('XmppApp', [
-    'templates-app', 'templates-common', 'AngularXmppServices', 'XmppUI', 'btford.markdown', 'tagged.directives.infiniteScroll', 'ngSanitize', 'ui.bootstrap', 'angularMoment', 'ui.router','infinite-scroll'
+    'templates-app', 'templates-common', 'AngularXmpp', 'XmppUI', 'btford.markdown', 'tagged.directives.infiniteScroll', 'ngSanitize', 'ui.bootstrap', 'angularMoment', 'ui.router','infinite-scroll'
 ])
 
 .config(function($stateProvider, $urlRouterProvider) {
@@ -263,13 +263,8 @@ $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, 
             }
         }
 
-        $scope.buddybubble=function(node){
-                var count= $scope.stream.buddycloud.data.unread[node.node];
-                if(isNaN(count)){
-                    return 0;
-                }else{
-                    return -count;
-                }
+        $scope.itemcount=function(node){
+            stream.buddycloud.data.unread[node];
         }
         $scope.messagecount=function(node){
             var jid=trimjidstring(node);

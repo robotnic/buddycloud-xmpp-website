@@ -32,15 +32,20 @@
     <div class="channels">
         <div class="antiscroll-inner scrollHolder">
             <div class="bubbleHolder" style="height: 66px;">
-                <div class="channel bubbling" style="top: 0px; z-index: 4;">
+                <div class="channel bubbling animate" style="top: 0px; z-index: 4;">
 
 
-                    <div ng-repeat="node in stream.buddycloud.data.subscriptions track by node.node" ui-sref="node({node:node.node})" class="menu" ng-class="{'selected':selectednode.node==node.node}">
+                    <div ng-repeat="node in stream.buddycloud.data.subscriptions  | orderBy:buddybubble" ui-sref="node({node:node.node})" class="menu" ng-class="{'selected':selectednode.node==node.node}" ng-animate="'animate'">
                         <div class="channel thechannel" ng-class="{'selected':node.node==stream.buddycloud.data.currentnode}">
                             <div class="avatar" style="background-image: url('{{node.node|gravatar}}')" title="{{node.node}}">
                                 <span class="channelpost counter" ng-if="stream.buddycloud.data.unread[node.node]">{{stream.buddycloud.data.unread[node.node]}}</span>
-                                <!-- sorry -->
+                                <!-- sorry, chat messages don't really fit here, design is not clear about nodes, and users -->
+<!--
                                 <span class="channelpost counter admin" ng-if="chat.notifications.unread[stream.buddycloud.data.affiliations[node.node].owner[0].jid.user+'@'+stream.buddycloud.data.affiliations[node.node].owner[0].jid.domain]" ng-click="openchat(node.node);">{{chat.notifications.unread[stream.buddycloud.data.affiliations[node.node].owner[0].jid.user+'@'+stream.buddycloud.data.affiliations[node.node].owner[0].jid.domain]}}</span>
+-->
+                                <span class="channelpost counter admin" ng-if="messagecount(node.node)" ng-click="openchat(node.node);">
+                                                {{messagecount(node.node)}}
+                                </span>
                             </div>
                             <div class="info">
                                 <span class="owner">{{node.node|getUser}}</span>

@@ -1,6 +1,6 @@
 MESSAGES=null;
 CHAT=null;
-angular.module('Minichat', ['AngularXmpp','luegg.directives'])
+angular.module('Minichat', ['AngularXmppServices','luegg.directives'])
 //luegg.directives for scroll cha down
 
 /*

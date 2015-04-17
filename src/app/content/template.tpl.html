@@ -1,5 +1,5 @@
-<div class="content">
-    <div class="channelView personal clearfix">
+<div class="content" id="parent">
+    <div class="channelView personal clearfix" infinite-scroll="loadmore()" infinite-scroll-distance="7" infinite-scroll-container="'#parent'" infinite-scroll-parent="true">
         <header class="channelHeader justify">
             <div ng-if="stream.buddycloud.data.currentnode=='recent'">
                 <img src="assets/icons/buddycloud_logo.png"/>

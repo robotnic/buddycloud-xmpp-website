@@ -1,4 +1,4 @@
-angular.module('XmppRoster', ['AngularXmpp'])
+angular.module('XmppRoster', ['AngularXmppServices'])
 
 /*
 Roster

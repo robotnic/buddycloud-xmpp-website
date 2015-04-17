@@ -1,4 +1,4 @@
-angular.module('XmppMuc', ['XmppCore', 'luegg.directives'])
+angular.module('XmppMuc', [ 'luegg.directives'])
 
 /**
 MUC
@@ -11,22 +11,21 @@ MUC
 
 .directive('xmppmuc', function() {
     return {
-        'require': '^xmpp',
         'restrict': 'E',
         'scope': {
-            room: "@"
+            room: "@",
+            xmpp: "=xmpp"
         },
         'transclude': false,
         'templateUrl': 'xmppmuc/template.tpl.html',
         'controller': 'XmppUiMuc',
-        'link': function(scope, element, attrs, xmppController) {
-            console.log("muc",xmppController);
-            if(xmppController.xmpp.jid){
-                scope.init(xmppController.xmpp);
+        'link': function(scope, element, attrs) {
+            if(scope.xmpp.data.connected){
+                scope.init(scope.xmpp);
             }else{
-                xmppController.on("connected",function(s,status){
-                    console.log("connected muc",xmppController);
-                    scope.init(xmppController.xmpp);
+                xmpp.socket.on("connected",function(s,status){
+                    console.log("connected muc",scope.xmpp);
+                    scope.init(scope.xmpp);
                 });
 
             }

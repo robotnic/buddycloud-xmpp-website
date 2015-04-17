@@ -1,6 +1,6 @@
 
 //angular.module("XmppUI", [ 'Buddycloud','BuddycloudRoster','XmppCore','XmppLike','XmppUI','XmppLogin','Minichat','XmppForm','XmppRoster','XmppMuc'])
-angular.module("XmppUI", [ 'Buddycloud','AngularXmpp','XmppRoster','Minichat','XmppMessage','XmppForm'])
+angular.module("XmppUI", [ 'Buddycloud','AngularXmppServices','XmppRoster','Minichat','XmppMessage','XmppForm'])
 
 
 

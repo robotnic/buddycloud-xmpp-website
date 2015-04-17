@@ -1,6 +1,6 @@
 var FORM=null;
 console.log("form");
-angular.module('XmppForm', ['AngularXmpp','luegg.directives'])
+angular.module('XmppForm', ['AngularXmppServices','luegg.directives'])
 
 /*
 Roster
